@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aaryan Kushwha | IT Student Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --dark-bg: #212529;
+            --light-bg: #f8f9fa;
+            --text-light: #f8f9fa;
+            --text-dark: #212529;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background-color: rgba(13, 110, 253, 0.95);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--text-light);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0d6efd 0%, #3a0ca3 100%);
+            color: var(--text-light);
+        }
+        
+        .hero-img-placeholder {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .hero-img-placeholder::before {
+            content: "AK";
+            font-size: 5rem;
+            font-weight: bold;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background-color: var(--primary-color);
+        }
+        
+        .skill-card {
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .skill-level {
+            width: 100%;
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            border-radius: 5px;
+            background: linear-gradient(90deg, var(--primary-color) 0%, #4361ee 100%);
+        }
+        
+        .project-card {
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .project-img-placeholder {
+            height: 200px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-color);
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            transition: all 0.3s ease;
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+            background-color: var(--primary-color);
+            color: white !important;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-img-placeholder {
+                width: 200px;
+                height: 200px;
+            }
+            .hero-content {
+                text-align: center;
+            }
+            .section-title::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar p-4">
+        <div class="container mx-auto flex flex-wrap items-center justify-between">
+            <a href="#hero" class="text-white text-2xl font-bold">AK</a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#hero" class="nav-link text-white hover:text-gray-200">Home</a>
+                <a href="#about" class="nav-link text-white hover:text-gray-200">About Me</a>
+                <a href="#skills" class="nav-link text-white hover:text-gray-200">Skills</a>
+                <a href="#projects" class="nav-link text-white hover:text-gray-200">Projects</a>
+                <a href="#contact" class="nav-link text-white hover:text-gray-200">Contact</a>
+            </div>
+            
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden w-full md:hidden">
+            <div class="container mx-auto py-4 flex flex-col space-y-4">
+                <a href="#hero" class="text-white hover:text-gray-200 text-center">Home</a>
+                <a href="#about" class="text-white hover:text-gray-200 text-center">About Me</a>
+                <a href="#skills" class="text-white hover:text-gray-200 text-center">Skills</a>
+                <a href="#projects" class="text-white hover:text-gray-200 text-center">Projects</a>
+                <a href="#contact" class="text-white hover:text-gray-200 text-center">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero flex items-center">
+        <div class="container mx-auto px-4 py-32">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="hero-content md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4">Hi, I'm <span class="text-yellow-300">Aaryan Kushwha</span></h1>
+                    <p class="text-xl md:text-2xl mb-6">Future IT Expert. Passionate Learner. Problem Solver.</p>
+                    <p class="text-gray-200 mb-8">BIT Student at Model Institute of Technology</p>
+                    <div class="flex space-x-4">
+                        <a href="#about" class="bg-white text-blue-600 px-6 py-3 rounded-md font-medium hover:bg-gray-100 transition duration-300">About Me</a>
+                        <a href="#contact" class="bg-transparent text-white border-2 border-white px-6 py-3 rounded-md font-medium hover:bg-white hover:text-blue-600 transition duration-300">Contact Me</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="hero-img-placeholder"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-3xl md:text-4xl font-bold text-center md:text-left">About Me</h2>
+            <div class="flex flex-col md:flex-row mt-10">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Hi, I'm Aaryan Kushwha, currently studying BIT at Model Institute of Technology. I'm an intermediate-level tech enthusiast with growing knowledge in networking, web development, and system design. I love exploring how things work and am currently learning Python, HTML, and basic cybersecurity principles.
+                    </p>
+                    <div class="mt-8 space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-blue-600 mr-3 w-6"></i>
+                            <p>Chandragiri, Kathmandu</p>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-blue-600 mr-3 w-6"></i>
+                            <p>aaryan123@gmail.com</p>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-university text-blue-600 mr-3 w-6"></i>
+                            <p>Model Institute of Technology, Baagbazar, Kathmandu</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 md:pl-10">
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                        <h3 class="text-2xl font-semibold mb-4">Educational Background</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="text-lg font-medium">Bachelor in Information Technology</h4>
+                                <p class="text-gray-600">Model Institute of Technology</p>
+                                <p class="text-gray-500">2023 - Present</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium">Interests & Aspirations</h4>
+                                <ul class="list-disc list-inside text-gray-600 mt-2">
+                                    <li>Web Development</li>
+                                    <li>Network Security</li>
+                                    <li>System Architecture</li>
+                                    <li>Software Development</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-3xl md:text-4xl font-bold text-center md:text-left">My Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+                <!-- Python -->
+                <div class="skill-card bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <i class="fab fa-python text-3xl text-blue-600 mr-3"></i>
+                        <h3 class="text-xl font-semibold">Python</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Basic programming concepts, data structures, and simple scripts.</p>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="width: 45%;"></div>
+                    </div>
+                    <p class="text-right mt-2 text-sm text-gray-500">Intermediate</p>
+                </div>
+                
+                <!-- HTML/CSS -->
+                <div class="skill-card bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <i class="fab fa-html5 text-3xl text-blue-600 mr-3"></i>
+                        <h3 class="text-xl font-semibold">HTML/CSS</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Creating web pages with basic styling and responsive design.</p>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="width: 55%;"></div>
+                    </div>
+                    <p class="text-right mt-2 text-sm text-gray-500">Intermediate</p>
+                </div>
+                
+                <!-- Networking Basics -->
+                <div class="skill-card bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-network-wired text-3xl text-blue-600 mr-3"></i>
+                        <h3 class="text-xl font-semibold">Networking Basics</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Understanding of TCP/IP, subnetting, and basic network topologies.</p>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="width: 60%;"></div>
+                    </div>
+                    <p class="text-right mt-2 text-sm text-gray-500">Intermediate</p>
+                </div>
+                
+                <!-- Git -->
+                <div class="skill-card bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <i class="fab fa-git-alt text-3xl text-blue-600 mr-3"></i>
+                        <h3 class="text-xl font-semibold">Git</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Version control basics, committing changes, and repository management.</p>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="width: 40%;"></div>
+                    </div>
+                    <p class="text-right mt-2 text-sm text-gray-500">Beginner</p>
+                </div>
+                
+                <!-- System Architecture -->
+                <div class="skill-card bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-server text-3xl text-blue-600 mr-3"></i>
+                        <h3 class="text-xl font-semibold">System Architecture</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Basic understanding of system components and infrastructure design.</p>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="width: 35%;"></div>
+                    </div>
+                    <p class="text-right mt-2 text-sm text-gray-500">Beginner</p>
+                </div>
+                
+                <!-- MS Office -->
+                <div class="skill-card bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-file-word text-3xl text-blue-600 mr-3"></i>
+                        <h3 class="text-xl font-semibold">MS Office</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Proficient in Word, Excel, and PowerPoint for academic and professional use.</p>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="width: 75%;"></div>
+                    </div>
+                    <p class="text-right mt-2 text-sm text-gray-500">Advanced</p>
+                </div>
+                
+                <!-- Cybersecurity Fundamentals -->
+                <div class="skill-card bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-shield-alt text-3xl text-blue-600 mr-3"></i>
+                        <h3 class="text-xl font-semibold">Cybersecurity Fundamentals</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Basic understanding of security principles and common vulnerabilities.</p>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="width: 30%;"></div>
+                    </div>
+                    <p class="text-right mt-2 text-sm text-gray-500">Beginner</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-3xl md:text-4xl font-bold text-center md:text-left">Projects</h2>
+            <p class="text-gray-600 mb-10">Showcasing my learning journey through practical applications</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card bg-white shadow-lg">
+                    <div class="project-img-placeholder">
+                        <i class="fas fa-laptop-code text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">My First Portfolio</h3>
+                        <p class="text-gray-600 mb-4">A personal portfolio website showcasing my skills and projects as a first-year BIT student.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">HTML</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">CSS</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">JavaScript</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">Coming Soon</span>
+                            <a href="#" class="text-blue-600 hover:text-blue-800">
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card bg-white shadow-lg">
+                    <div class="project-img-placeholder">
+                        <i class="fas fa-network-wired text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Network Simulation in Cisco Packet Tracer</h3>
+                        <p class="text-gray-600 mb-4">A simulated network environment demonstrating routing, switching, and basic network security.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Networking</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Cisco</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">TCP/IP</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">Coming Soon</span>
+                            <a href="#" class="text-blue-600 hover:text-blue-800">
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card bg-white shadow-lg">
+                    <div class="project-img-placeholder">
+                        <i class="fab fa-html5 text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Simple Web Page in HTML</h3>
+                        <p class="text-gray-600 mb-4">A basic web page created to practice HTML structure, CSS styling, and responsive design principles.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">HTML5</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">CSS3</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Web Design</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">Coming Soon</span>
+                            <a href="#" class="text-blue-600 hover:text-blue-800">
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-3xl md:text-4xl font-bold text-center md:text-left">Contact Me</h2>
+            <div class="flex flex-col md:flex-row mt-10 gap-10">
+                <div class="md:w-1/2">
+                    <p class="text-lg text-gray-700 mb-6">Feel free to reach out if you have any questions or would like to connect. I'm always open to discussing tech, education, or potential collaboration opportunities.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-blue-600 p-3 rounded-lg mr-4">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold">Email</h3>
+                                <p class="text-gray-600">aaryan123@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-blue-600 p-3 rounded-lg mr-4">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold">Location</h3>
+                                <p class="text-gray-600">Chandragiri, Kathmandu</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-blue-600 p-3 rounded-lg mr-4">
+                                <i class="fas fa-university text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold">Institute</h3>
+                                <p class="text-gray-600">Model Institute of Technology, Baagbazar</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <form class="contact-form bg-white p-8 rounded-lg shadow-md">
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-700 text-sm font-semibold mb-2">Name</label>
+                            <input type="text" id="name" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none" placeholder="Your Name">
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block text-gray-700 text-sm font-semibold mb-2">Email</label>
+                            <input type="email" id="email" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none" placeholder="Your Email">
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 text-sm font-semibold mb-2">Message</label>
+                            <textarea id="message" rows="5" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none" placeholder="Your Message"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-blue-700 transition duration-300">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold">Aaryan Kushwha</h2>
+                    <p class="text-gray-400">BIT Student | Future IT Expert</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="social-icon bg-gray-700 text-gray-300 hover:bg-blue-600">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="social-icon bg-gray-700 text-gray-300 hover:bg-blue-600">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="social-icon bg-gray-700 text-gray-300 hover:bg-blue-600">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon bg-gray-700 text-gray-300 hover:bg-blue-600">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <hr class="border-gray-700 my-8">
+            <div class="text-center text-gray-400">
+                <p>&copy; 2023 Aaryan Kushwha. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle mobile menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Change navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Close mobile menu when clicking a link
+                mobileMenu.classList.add('hidden');
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
